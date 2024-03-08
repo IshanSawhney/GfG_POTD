@@ -1,0 +1,17 @@
+class Solution{
+  public:
+    char nthCharacter(string s, int r, int ind) {
+        int n= s.size();
+        while(r--){
+            string k="";
+            for(int i=0;i<n;i++){
+                if(s[i]=='1'){
+                    k+= "10";
+                }
+                else{
+                    k+= "01";
+                }
+            }
+           s=k.substr(0,n);
+        }return s[ind];}
+};
