@@ -1,0 +1,23 @@
+class Solution{
+  public:
+    vector<int> matrixDiagonally(vector<vector<int>>&mat)
+    {
+        int n = mat.size();
+        map<int,vector<int>>mpp;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                mpp[i+j].push_back(mat[i][j]);
+            }
+        }
+        vector<int> res;
+        for(auto it:mpp){
+            if(it.first%2==0){
+                reverse(it.second.begin(),it.second.end());
+            }
+            for(auto e:it.second){
+                res.push_back(e);
+            }
+        }
+        return res;
+    }
+};
