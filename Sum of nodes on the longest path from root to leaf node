@@ -1,0 +1,29 @@
+//agar longest path 1 hi ho: sum kardo nodes ka
+//agar ek se zyada longest path ho: to sabhi paths ki nodes ka sum kardo aur fir
+//jis bhi path ke nodes ka sum highest aaya usko print kardo
+class Solution
+{
+    int path=0;
+    int sum=0;
+    void solve(Node* root,int currLen, int currSum){
+        if(root== nullptr){
+            if(currLen>path){
+                path=currLen;
+                sum=currSum;
+            }
+            else if(currLen== path){
+                sum=max(sum,currSum);
+            }
+            return;
+        }
+        solve(root->left,currLen+1,currSum+root->data);
+        solve(root->right,currLen+1,currSum+root->data);
+    }
+public:
+    
+    int sumOfLongRootToLeafPath(Node *root)
+    {
+        solve(root,0,0);
+        return sum;
+    }
+};
