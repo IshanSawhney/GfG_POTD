@@ -1,0 +1,28 @@
+class Solution{
+    public:
+    //Function to store the zig zag order traversal of tree in a list.
+    vector <int> zigZagTraversal(Node* root)
+    {
+    	vector <int> ans;
+    	queue<Node*> q;
+    	int level=0;
+    	q.push(root);
+    while(!q.empty()){
+        level++;
+        vector<int> temp;
+        int n=q.size();
+        for(int i=0;i<n;i++){
+            Node* elem=q.front();
+            q.pop();
+            temp.push_back(elem->data);
+            if(elem->left)q.push(elem->left);
+            if(elem->right)q.push(elem->right);
+        }
+        if(level % 2==0) reverse(temp.begin(),temp.end());
+        for(auto element:temp){
+            ans.push_back(element);
+        }}
+        return ans;
+    }
+    
+};
