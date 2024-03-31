@@ -1,0 +1,26 @@
+class Solution {
+  public:
+
+  vector<int> inorder;
+    void INORDER(Node* root){
+        if(!root)return;
+        INORDER(root->left);
+        inorder.push_back(root->data);
+        INORDER(root->right);
+    }
+    int pairsViolatingBST(int n, Node *root) {
+        INORDER(root);
+        if(inorder.size()<=1)return 0;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        for(int i=0;i<inorder.size();i++)pq.push({inorder[i],i});
+        int ans=0;
+        vector<int> x;
+        while(!pq.empty()){
+            auto it = pq.top();pq.pop();
+            int cnt=upper_bound(x.begin(),x.end(),it.second)-x.begin();
+            ans += it.second-cnt;
+            x.insert(upper_bound(x.begin(),x.end(),it.second),it.second);
+        }
+        return ans;
+    }
+};
