@@ -1,27 +1,28 @@
 // Step1) root node se x aur y tak ka path nikal lena hai
 //Step2) hume x aur y se root tak jaana hai aur jo bhi comman element aaya vhi to comman ancesstor
-vector<Node*> pathx,pathy;
+vector<Node*> pathx, pathy;
 class Solution
 {
-    public:
-    void dfs(Node* root,vector<Node*> curr,int x,int y){
+    public:    
+    void dfs(Node* root, vector<Node*> curr, int x, int y){
         curr.push_back(root);
-        if(root->data==x) pathx=curr;
-        if(root->data==y) pathy=curr;
-        if(root->left) dfs(root->left,curr,x,y);
-        if(root->right) dfs(root->right,curr,x,y);
+        if(root->data==x) pathx= curr;
+        if(root->data==y) pathy= curr;
+        
+        if(root->left) dfs(root->left, curr, x, y);
+        if(root->right) dfs(root->right, curr, x, y);
         curr.pop_back();
     }
-    
     /*You are required to complete below function */
-    int kthCommonAncestor(Node *root, int k,int x, int y)
+    int kthCommonAncestor(Node *root, int k, int x, int y)
     {
-        vector<Node*>curr;
-        dfs(root,curr,x,y);
+        vector<Node*> curr;
+        dfs(root, curr,x, y);
+        
         int i=0;
-        while(i<pathx.size() && i<pathy.size() &&pathx[i]==pathy[i]))i++;
+        while(i<pathx.size() && i<pathy.size() && pathx[i]==pathy[i]) i++;
         i-=k;
         if(i<0) return -1;
-        return pathx[i]->data;
+        return pathx[i]-> data;
     }
 };
