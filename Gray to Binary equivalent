@@ -1,0 +1,16 @@
+class Solution{
+    public:
+    // function to convert a given Gray equivalent n to Binary equivalent.
+    int grayToBinary(int n)
+    {
+        
+        // Your code here
+        int ans=0;
+        while(n){
+            ans^=n;
+            n>>=1;
+        }
+        return ans;
+        
+    }
+};
