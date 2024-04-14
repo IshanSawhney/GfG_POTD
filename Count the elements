@@ -1,0 +1,14 @@
+class Solution {
+  public:
+    vector<int> countElements(vector<int> &a, vector<int> &b, int n, vector<int> &query,
+                              int q) {
+        // Your code goes here;
+        sort(b.begin(), b.end());
+        vector <int> ans;
+        for( auto it : query){
+            int count= upper_bound(b.begin(), b.end(),a[it])-b.begin();
+            ans.push_back(count);
+        }
+        return ans;
+    }
+};
