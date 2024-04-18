@@ -1,0 +1,21 @@
+class Solution{
+	
+	
+	public:
+	vector<int> findMissing(int a[], int b[], int n, int m) 
+	{ 
+	    unordered_set <int>s;
+	    vector<int> ans;
+	    //set me b arr ke ele insert
+	    for(int i=0;i<m;i++){
+	        s.insert(b[i]);
+	    }
+	    //a!= set
+	    for(int i=0;i<n;i++){
+	        if(s.find(a[i])==s.end()){
+	            ans.push_back(a[i]);
+	        }
+	    }
+	    return ans;
+	} 
+};
