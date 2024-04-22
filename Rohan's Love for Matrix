@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    int firstElement(int n) {
+        // code here
+        int mod= 1000000007;
+        // base case likho
+        if(n<=2) return 1;
+        //fibo wal CODE LIKHO
+        int one=1;
+        int two=1;
+        int sum=0;
+        for(int i=3 ; i<=n; i++){
+            sum=(one+two)%mod;
+            one = two;
+            two=sum;
+        }
+        return sum;
+    }
+};
