@@ -1,0 +1,22 @@
+class Solution
+{
+public:
+    int ways(int x, int y)
+    {
+        //code here.
+        int mod= 1e9+7;
+        vector<vector<int>> DP(x+1,vector<int>(y+1,-1));
+        for (int i=0;i<=x;i++){
+            for(int j=0;j<=y;j++){
+                //base case
+                if(i==0 || j==0){
+                    DP[i][j] =1;
+                }
+                else{
+                    DP[i][j] = (DP[i-1][j] + DP[i][j-1])%mod;
+                }
+            }
+        }
+        return DP[x][y];
+    }
+};
