@@ -1,0 +1,17 @@
+class Solution {
+  public:
+    int findMaxSum(int n, int m, vector<vector<int>> mat) {
+        // code here
+        int sum = -1;
+        for(int i=1;i<n-1;i++){
+            for(int j=1;j<m-1;j++){
+                int pehlirow=mat[i-1][j-1]+mat[i-1][j]+ mat[i-1][j+1];
+                int dusrirow=mat[i][j];
+                int teesrirow=mat[i+1][j-1]+mat[i+1][j]+mat[i+1][j+1];
+                int currsum=pehlirow+dusrirow+teesrirow;
+                sum=max(sum,currsum);
+            }
+        }
+        return sum;
+    }
+};
