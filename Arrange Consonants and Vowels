@@ -1,0 +1,38 @@
+
+class Solution
+{
+    public:
+    // task is to complete this function
+    // function should return head to the list after making 
+    // necessary arrangements
+    struct Node* arrangeCV(Node *head)
+    {
+       queue<char> vowel,consonant;
+       Node*curr=head;
+       while(curr!=NULL){
+           if(curr->data=='a'|| curr->data=='e'||
+           curr->data=='i'|| curr->data=='o'|| curr->data=='u'){
+               vowel.push(curr->data);
+               curr=curr->next;
+           }
+           else{
+               consonant.push(curr->data);
+               curr=curr->next;
+           }
+       }
+       curr=head;
+       while(curr){
+           if(!vowel.empty()){
+               curr->data=vowel.front();
+               vowel.pop();
+           }
+           else{
+               curr->data=consonant.front();
+               consonant.pop();
+           }
+           curr=curr->next;
+       }
+       return head;
+       
+    }
+};
