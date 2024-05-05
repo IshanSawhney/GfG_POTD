@@ -1,0 +1,23 @@
+class Solution{
+  public:
+  //agar left child hai to level -1
+  //agar right child hai to level +1
+  map<int,int> mp;
+  void solve(Node* root,int level){
+      if(root==NULL)
+      return;
+      
+      mp[level]+=root->data;
+      
+      solve(root->left,level-1);
+      solve(root->right,level+1);
+  }
+    vector <int> verticalSum(Node *root) {
+        // add code here
+        vector <int> ans;
+        solve(root,0);
+        for(auto i:mp)
+        ans.push_back(i.second);
+        return ans;
+    }
+};
