@@ -1,0 +1,28 @@
+void CodeGenius(Node* node, vector<int> &ans){
+    if(node==NULL)
+    return;
+    
+    if(node->right && node->left ==NULL)
+    ans.push_back(node->right->data);
+    
+    if(node->left && node->right==NULL)
+    ans.push_back(node->left->data);
+    
+    CodeGenius(node->right,ans);
+    CodeGenius(node->left,ans);
+}
+
+
+vector<int> noSibling(Node* node)
+{
+    // code here
+    vector<int> ans;
+    CodeGenius(node,ans);
+    
+    if(ans.size()==0){
+        ans.push_back(-1);
+        return ans;
+    }
+    sort(ans.begin(),ans.end());
+    return ans;
+}
