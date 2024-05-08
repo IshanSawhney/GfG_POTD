@@ -1,0 +1,27 @@
+class Solution {
+  public:
+   void CodeGenius(Node* node, vector<int>& curPath,vector<vector<int>>&ans){
+       if(!node)
+       return;
+     curPath.push_back(node->data);
+     
+     if(!node->left && !node->right){
+         ans.push_back(curPath);
+         curPath.pop_back();
+         return;
+     }
+     if(node->left){
+         CodeGenius(node->left,curPath,ans);
+     }
+     if(node->right){
+          CodeGenius(node->right,curPath,ans);
+     }
+     curPath.pop_back();
+       
+   }
+    vector<vector<int>> Paths(Node* root) {
+        vector<vector<int>>ans;
+        vector<int> curPath;
+        CodeGenius(root,curPath,ans);
+        return ans;    }
+};
