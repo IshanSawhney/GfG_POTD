@@ -1,0 +1,18 @@
+class Solution {
+  public:
+    vector<int> jugglerSequence(int n) {
+        // code here
+        vector<int> ans;
+        ans.push_back(n);
+        while(n>1){
+            if(n%2==0){
+                n=sqrt(n);
+            }
+            else{
+                n=n*sqrt(n);
+            }
+            ans.push_back(n);
+        }
+        return ans;
+    }
+};
