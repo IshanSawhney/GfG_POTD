@@ -1,0 +1,29 @@
+class Solution {
+  public:
+    int solve(vector<vector<int>>&dp,int i,int j,vector<int> &cost){
+        if(i<0){
+            return 1e9;
+        }
+        if(j<0){
+            return 1e9;
+        }
+        if(j==0){
+            return 0;
+        }
+        if(dp[i][j] != 1e9){
+            return dp[i][j];
+        }
+        int take=1e9;
+        if(cost[i]!=-1 && j>i){
+            take=cost[i]+solve(dp,i,j-(i+1),cost);
+        }
+        int not_take=solve(dp,i-1,j,cost);
+        return dp[i][j]=min(take,not_take);
+    }
+  
+  
+    int minimumCost(int n, int w, vector<int> &cost) {
+        vector<vector<int>>dp(n,vector<int>(w+1,1e9));
+        return solve(dp,n-1,w,cost);
+    }
+};
