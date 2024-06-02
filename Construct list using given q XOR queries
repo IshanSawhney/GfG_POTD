@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    vector<int> constructList(int q, vector<vector<int>> &queries) {
+        // code here
+        int xr=0;
+        vector<int> ans;
+        for(int i=q-1;i>=0;i--){
+            if(queries[i][0]==0){
+                ans.push_back(queries[i][1]^xr);
+            }
+            else{
+                xr^=queries[i][1];
+            }
+        }
+        ans.push_back(xr);
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
+};
