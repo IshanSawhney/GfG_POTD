@@ -1,0 +1,22 @@
+class Solution {
+  public:
+    string binaryNextNumber(string s) {
+        
+        int i=s.size()-1;
+        while(s[i] != '0' && i>=0){
+            s[i]='0';
+            i--;
+        }
+        if(i>=0){
+            s[i]='1';
+        }
+        else{
+            s='1'+ s;
+        }
+        i=0;
+        while(s[i]=='0'){
+            i++;
+        }
+        return s.substr(i,s.size()-i);
+    }
+};
