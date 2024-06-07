@@ -1,0 +1,26 @@
+class Solution {
+  public:
+    // l and r are input array
+    // maxx : maximum in r[]
+    // n: size of array
+    // arr[] : declared globally with size equal to maximum in l[] and r[]
+    // Function to find the maximum occurred integer in all ranges.
+    int maxOccured(int n, int l[], int r[], int maxx) {
+
+        int count[maxx+1]={0};
+        for(int i=0;i<n;i++){
+            count[l[i]]++;
+            count[r[i]+1]--;
+        }
+        int max=0;
+        int maxCount=0;
+        for(int i=1;i<maxx;i++){
+            count[i]+=count[i-1];
+            if(maxCount<count[i]){
+                max=i;
+                maxCount=count[i];
+            }
+        }
+        return max;
+    }
+};
