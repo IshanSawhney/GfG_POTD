@@ -1,0 +1,16 @@
+class Solution {
+  public:
+    int findExtra(int n, int arr1[], int arr2[]) {
+        int s=0,e=n-2;
+        while(s<=e){
+            int mid=(s+e)/2;
+            if(arr1[mid]==arr2[mid]){
+                s=mid+1;
+            }
+            else{
+                e=mid-1;
+            }
+        }
+        return s;
+    }
+};
