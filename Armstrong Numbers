@@ -1,0 +1,16 @@
+class Solution {
+  public:
+    string armstrongNumber(int n){
+        int sum=0;
+        int temp = n;
+        while(temp){
+            int digit=temp%10;
+            sum+= digit*digit*digit;
+            temp/=10;
+        }
+        if(sum==n)
+        return "Yes";
+        else
+        return "No";
+    }
+};
