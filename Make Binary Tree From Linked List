@@ -1,4 +1,7 @@
-TreeNode *solve(vector<int> &arr,int i){
+class Solution {
+  public:
+  
+    TreeNode *solve(vector<int> &arr,int i){
     //base case
     if(i>=arr.size())
     return NULL;
@@ -19,3 +22,4 @@ void convert(Node *head, TreeNode *&root) {
     }
     root=solve(arr,0);
 }
+};
