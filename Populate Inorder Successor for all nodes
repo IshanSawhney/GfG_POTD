@@ -1,0 +1,23 @@
+class Solution {
+  public:
+  //CodeGenius
+  //inorder left->root->right
+  void inorder(Node *root,vector<Node*>&ans){
+      //base case
+      if(root != NULL){
+      //recursive case
+      inorder(root->left,ans);
+      ans.push_back(root);
+      inorder(root->right,ans);
+  }
+  }
+
+    void populateNext(Node *root) {
+        // code here
+        vector<Node*>ans;
+        inorder(root,ans);
+        for(int i=0;i<ans.size()-1;i++){
+            ans[i]->next=ans[i+1];
+        }
+    }
+};
