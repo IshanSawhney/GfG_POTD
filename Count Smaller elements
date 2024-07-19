@@ -1,0 +1,56 @@
+//CPP SOLUTION
+#include <ext/pb_ds/assoc_container.hpp>
+// Including tree_order_statistics_node_update
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+#define ordered_set tree < int ,  null_type ,  less_equal<int> ,  rb_tree_tag ,  tree_order_statistics_node_update >
+
+class Solution {
+  public:
+    vector<int> constructLowerArray(vector<int> &arr) {
+        // codeGenius
+        ordered_set o_set;
+        vector<int> ans(arr.size(),0);
+        for(int i=arr.size()-1;i>=0;i--){
+          ans[i]= o_set.order_of_key(arr[i]);
+          o_set.insert(arr[i]);
+        }
+        return ans;
+    }
+};
+
+
+
+
+//JAVA SOLUTION
+class Solution {
+    public int binarySearch(List<Integer> v, int x) {
+        int l = 0, h = v.size() - 1, mid;
+        while (l <= h) {
+            mid = (l + h) / 2;
+            if (v.get(mid) == x) return mid;
+            else if (v.get(mid) > x) h = mid - 1;
+            else l = mid + 1;
+        }
+        return -1;
+    }
+
+    public int[] constructLowerArray(int[] arr) {
+        List<Integer> v = new ArrayList<>();
+        for (int num : arr) {
+            v.add(num);
+        }
+        Collections.sort(v);
+
+        int[] t = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            int max = binarySearch(v, arr[i]);
+            while (max > 0 && v.get(max - 1).equals(v.get(max))) {
+                max--;
+            }
+            t[i] = max;
+            v.remove(max);
+        }
+        return t;
+    }
+}
