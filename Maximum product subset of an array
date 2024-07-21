@@ -1,0 +1,17 @@
+class Solution {
+  public:
+    long long int findMaxProduct(vector<int>& arr) {
+        // codeGenius
+        long long prod=1,maxi=INT_MIN,zero=0;
+        for(int i=0;i<arr.size();i++){
+            if(arr[i]!=0){
+                prod=(1LL*prod*arr[i])%1000000007;
+                if(arr[i]<0) maxi=max(maxi,1LL*arr[i]);
+            }
+            else zero++;
+        }
+        if(zero==arr.size()) return 0;
+        if(prod<0) prod/=maxi;
+        return (1LL*prod)%1000000007;
+    }
+};
