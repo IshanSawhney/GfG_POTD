@@ -1,16 +1,19 @@
 class Solution {
   public:
-    bool hasPathSum(Node *root, int target) {
-        // codeGenius
-        //base case
-        if(root==NULL){
-            return false;
+    void solve(int& ans, Node* root, int val){
+        //CodeGenius
+        if (!root) return ;
+        val = val*10 + root->data;
+        if (!root->left && !root->right){
+            ans += val;
         }
-        //recursive case
-        if(root-> left ==NULL && root->right == NULL){
-            return target==root->data;
-        }
-        int newtarget=target - root->data;
-        return hasPathSum(root->left,newtarget) || hasPathSum(root->right,newtarget);
+        solve(ans, root->left, val);
+        solve(ans, root->right, val);
+    }
+    int treePathsSum(Node *root) {
+        int ans = 0;
+        solve(ans, root, 0);
+        return ans;
     }
 };
+
