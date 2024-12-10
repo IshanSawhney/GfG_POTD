@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    int minRemoval(vector<vector<int>> &intervals) {
+        // CodeGenius
+        int deleteCount=0;
+        sort(intervals.begin(),intervals.end());
+        int prev=intervals[0][1];
+        for(int i=1;i<intervals.size();i++){
+            if(intervals[i][0]<prev){
+                deleteCount++;
+                prev=min(prev,intervals[i][1]);
+            }
+            else{
+                prev=intervals[i][1];
+            }
+        }
+        return deleteCount;
+    }
+};
