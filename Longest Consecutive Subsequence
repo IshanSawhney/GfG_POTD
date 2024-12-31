@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    int longestConsecutive(vector<int>& arr) {
+        //CodeGenius
+        int freq[1000001]={0};
+        int count=0;
+        int ans=INT_MIN;
+        int maxi=-1;
+        for(int i=0;i<arr.size();i++){
+            freq[arr[i]]++;
+            maxi=max(maxi,arr[i]);
+        }
+        for(int i=0;i<=maxi;i++){
+            if(freq[i]>0) count++;
+            else{
+                ans=max(ans,count);
+                count=0;
+            }
+            ans=max(ans,count);
+        }
+        return ans;
+    }
+};
