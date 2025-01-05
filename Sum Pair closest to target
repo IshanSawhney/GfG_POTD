@@ -1,0 +1,31 @@
+class Solution {
+  public:
+    vector<int> sumClosest(vector<int>& arr, int target) {
+        sort(arr.begin() , arr.end());
+        
+        int start = 0 ,end= arr.size() - 1;
+        vector<int> ans;
+        int minidiffwithtarget = INT_MAX;
+        
+        while(start < end){
+            int sum = arr[start] + arr[end];
+            
+            if(abs(target - initialsum) < minidiffwithtarget){
+                minidiffwithtarget = abs(target-sum);
+                ans = {arr[start] , arr[end]};
+            }
+            
+            if(sum < target){
+                start++;
+            }
+            else if(sum > target){
+                end--;
+            }else{
+                return ans;
+            }
+
+        }
+        
+        return ans;
+    }
+};
