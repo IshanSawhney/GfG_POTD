@@ -10,7 +10,7 @@ class Solution {
         while(start < end){
             int sum = arr[start] + arr[end];
             
-            if(abs(target - initialsum) < minidiffwithtarget){
+            if(abs(target - sum) < minidiffwithtarget){
                 minidiffwithtarget = abs(target-sum);
                 ans = {arr[start] , arr[end]};
             }
