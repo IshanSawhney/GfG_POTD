@@ -1,6 +1,6 @@
 class Solution {
   public:
-    Node *copyList(Node *head) {
+    Node *cloneLinkedList(Node *head) {
         //CodeGenius
         //STEP 1 input list ki nodes ke beech me op list ki node hume rkhni hai mapping create
         if(head==NULL) return head;
