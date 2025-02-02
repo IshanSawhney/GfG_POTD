@@ -1,0 +1,51 @@
+//C++ CODE
+class Solution {
+  public:
+    vector<vector<int>> levelOrder(Node *root) {
+        // CodeGenius
+         vector<vector<int>>result;
+        queue<Node*>q;
+        q.push(root);
+        
+        while(!q.empty()){
+            vector<int>ans;
+            Node* curr=q.front();
+            q.pop();
+            ans.push_back(curr->data);
+            if(curr->left) q.push(curr->left);
+            if(curr->right) q.push(curr->right);
+            result.push_back(ans);
+        }
+        return result;
+    }
+};
+
+// JAVA CODE:
+class Solution {
+    public ArrayList<ArrayList<Integer>> levelOrder(Node root) {
+        // CodeGenius
+        ArrayList< ArrayList <Integer>> a=new  ArrayList <>();
+        Queue<Node> q = new LinkedList<Node>(); 
+        q.add(root); 
+        while (!q.isEmpty()) 
+        { ArrayList <Integer> temp=new ArrayList <Integer>();
+        int size=q.size();
+        for(int i=0;i<size;i++){
+            Node t = q.poll(); 
+            temp.add(t.data);
+
+         
+            if (t.left != null) { 
+                q.add(t.left); 
+            } 
+
+            if (t.right != null) { 
+                q.add(t.right); 
+            }
+            
+        }
+          a.add(temp);  
+        }
+            return a;
+    }
+}
