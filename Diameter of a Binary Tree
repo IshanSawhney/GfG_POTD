@@ -1,0 +1,39 @@
+//C++ CODE
+class Solution {
+  public:
+    int height(Node* root,int &ans){
+        //base case
+        if(!root) return 0;
+        //recursive case
+        int LH=height(root->left,ans);
+        int RH=height(root->right,ans);
+        ans=max(ans,LH+RH);
+        return max(LH,RH)+1;
+        }
+    int diameter(Node* root) {
+        //CodeGenius
+        int ans=0;
+        height(root,ans);
+        return ans;
+    }
+};
+// JAVA CODE
+class Solution {
+    int diameter=0;
+    int diameter(Node root) {
+        // Your code here
+        calculateDiameterUsingHeight(root);
+        return diameter;
+    }
+    
+    int calculateDiameterUsingHeight(Node root) {
+        if(root == null) return -1;
+        
+        int leftHeight = calculateDiameterUsingHeight(root.left);
+        int rightHeight = calculateDiameterUsingHeight(root.right);
+        
+        diameter = Math.max(diameter, leftHeight + rightHeight + 2);
+        
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+}
