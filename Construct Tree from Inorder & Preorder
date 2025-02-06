@@ -1,0 +1,51 @@
+//C++ CODE
+class Solution {
+  public:
+    unordered_map<int,int>mp;
+    Node* solve(vector<int> &preorder,int s,int e,int &preInd){
+        //base case
+        if(s>e) return NULL;
+        //recursive case
+        int val=preorder[preInd];
+        Node* root= new Node(preorder[preInd++]);
+        
+        
+        root->left=solve(preorder,s,mp[val]-1,preInd);
+        root->right=solve(preorder,mp[val]+1,e,preInd);
+        return root;
+        
+    }
+    Node *buildTree(vector<int> &inorder, vector<int> &preorder) {
+        // CodeGenius
+        for(int i=0;i<inorder.size();i++){
+            mp[inorder[i]]=i;
+        }
+        int preInd=0;
+        return solve(preorder,0,inorder.size()-1,preInd);
+    }
+};
+//JAVA CODE
+class Solution {
+    public static Node buildTree(int inorder[], int preorder[]) {
+        HashMap < Integer , Integer > map = new HashMap<>();
+        
+        for(int i = 0;i<inorder.length;i++){
+            map.put (inorder[i] , i );
+        }
+        return split( inorder , 0,inorder.length-1 ,preorder , 0, map);
+    }
+    
+    public static Node split( int []inorder , int instart, int inend , int[] preorder, int index ,HashMap<Integer , Integer> map ){
+        Node root = new Node (preorder[index]);
+        
+        int mid = map.get (root.data);
+          if(mid>instart){
+        root.left = split(inorder, instart , mid-1,preorder, index+1,map );
+          }
+          if(mid<inend){
+                 root.right = split(inorder , mid+1, inend ,preorder ,index + mid - instart +1,map);
+          }
+      
+    return root;
+    }
+}
