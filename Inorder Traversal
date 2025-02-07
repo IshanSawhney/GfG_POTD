@@ -1,0 +1,35 @@
+//C++ CODE
+class Solution {
+  public:
+    void inorder(Node* root,vector<int>&ans){
+        //base case
+        if(!root) return;
+        //recursive case;
+        inorder(root->left,ans);
+        ans.push_back(root->data);
+        inorder(root->right,ans);
+    }
+    vector<int> inOrder(Node* root) {
+        //CodeGenius
+        vector<int>ans;
+        inorder(root,ans);
+        return ans;
+    }
+};
+
+//JAVA CODE
+class Solution {
+    
+    void inorder(Node root,ArrayList<Integer> in){
+        if(root == null) return;
+        inorder(root.left,in);
+        in.add(root.data);
+        inorder(root.right,in);
+    }
+    ArrayList<Integer> inOrder(Node root) {
+        // CodeGenius
+        ArrayList<Integer> in =  new ArrayList<>();
+        inorder(root,in);
+        return in;
+    }
+}
