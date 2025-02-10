@@ -1,0 +1,44 @@
+//C++ CODE
+class Solution {
+  public:
+    void solve(Node *root, int k,int currSum,int &count,unordered_map<int,int>&mp){
+        if(!root) return ;
+        currSum+=root->data;
+        if(currSum==k) count ++;
+        if(mp.find(currSum-k) != mp.end()) count+=mp[currSum-k];
+        mp[currSum]++;
+        solve(root->left,k,currSum,count,mp);
+        solve(root->right,k,currSum,count,mp);
+        mp[currSum]--;
+    }
+    int sumK(Node *root, int k) {
+        //CodeGenius
+        unordered_map<int,int>mp;
+        int count=0;
+        solve(root,k,0,count,mp);
+        return count;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int sumK(Node root, int k) {
+        // code here
+        Map<Integer , Integer> map = new HashMap<>();
+        map.put(0 , 1);
+        return get(root , map , 0 , k);
+    }
+    private int get(Node root , Map<Integer , Integer> map , int sum , int k){
+        if(root == null) return 0;
+        sum += root.data;
+        int ans = 0;
+        if(map.containsKey(sum - k)){
+            ans += map.get(sum - k);
+        }
+        map.put(sum , map.getOrDefault(sum , 0) + 1);
+        ans += get(root.left , map , sum , k);
+        ans += get(root.right , map , sum , k);
+        map.put(sum , map.get(sum) - 1);
+
+        return ans;
+    }
+}
