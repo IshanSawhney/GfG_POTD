@@ -1,25 +1,44 @@
+//C++ CODE
 class Solution {
-
   public:
-    // Function to check whether a Binary Tree is BST or not.
-    //inorder left-node-right
-    void inorder(Node* root,vector<int> &ans){
-        if(root==NULL){
-            return;
-        }
-        inorder(root->left,ans);
-        ans.push_back(root->data);
-        inorder(root->right,ans);
+    void inorder(Node* root,vector<int>&temp){
+        if(!root)return ;
+        inorder(root->left,temp);
+        temp.push_back(root->data);
+        inorder(root->right,temp);
     }
     bool isBST(Node* root) {
-        //codeGenius
-        vector<int> ans;
-        inorder(root,ans);
-        for(int i=0;i<ans.size()-1;i++){
-            if(ans[i]>=ans[i+1]){
+        //CodeGenius
+        if(!root->left && !root->right) return true;
+        vector<int>temp;
+        inorder(root,temp);
+        for(int i=0;i<temp.size()-2;i++){
+            if(temp[i]>temp[i+1]) return false;
+        }
+        return true;
+        
+    }
+};
+//JAVA CODE
+class Solution {
+    void inorder(Node root, List<Integer> h) {
+        if (root == null) {
+            return;
+        }
+        // LNR
+        inorder(root.left, h);
+        h.add(root.data);
+        inorder(root.right, h);
+    }
+
+    boolean isBST(Node root) {
+        List<Integer> h = new ArrayList<>();
+        inorder(root, h);
+        for (int i = 1; i < h.size(); i++) {
+            if (h.get(i) <= h.get(i - 1)) {
                 return false;
             }
         }
         return true;
     }
-};
+}
