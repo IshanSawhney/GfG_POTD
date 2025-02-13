@@ -1,0 +1,44 @@
+//C++ CODE
+class Solution {
+  public:
+    void inorder(Node *root,vector<int>&ans){
+        if(!root) return;
+        inorder(root->left,ans);
+        ans.push_back(root->data);
+        inorder(root->right,ans);
+    }
+    bool findTarget(Node *root, int target) {
+        //CodeGenius
+        vector<int>ans;
+        inorder(root,ans);
+        int s=0,e=ans.size()-1;
+        while(s<e){
+            if(ans[s]+ans[e]==target) return true;
+            else if(ans[s]+ans[e]>target) e--;
+            else s++;
+        }
+        return false;
+    }
+};
+//JAVA CODE
+class Solution {
+    void inorderTraversal(Node root, ArrayList<Integer> inorder) {
+        if (root == null) return;
+        inorderTraversal(root.left, inorder);
+        inorder.add(root.data);
+        inorderTraversal(root.right, inorder);
+    }
+    boolean findTarget(Node root, int target) {
+        ArrayList<Integer> inorder = new ArrayList<>();
+        inorderTraversal(root, inorder);
+        int left = 0, right = inorder.size() - 1;
+        while (left < right) {
+            int currentSum = inorder.get(left) + inorder.get(right);
+            if (currentSum == target) return true;
+            if (currentSum < target) left++;
+            else
+                right--;
+        }
+        return false;
+    }
+}
