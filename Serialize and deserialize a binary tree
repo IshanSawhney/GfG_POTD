@@ -1,9 +1,8 @@
-class Solution
-{
-    public:
-    //preorder traversal 
-    void preorder(Node * root, vector<int> &ans){
-        if(root==NULL){
+//C++ CODE
+class Solution {
+  public:
+    void preorder(Node *root,vector<int>&ans){
+        if(!root){
             ans.push_back(-1);
             return;
         }
@@ -11,29 +10,56 @@ class Solution
         preorder(root->left,ans);
         preorder(root->right,ans);
     }
-       //Function to serialize a tree and return a list containing nodes of tree.
-    vector<int> serialize(Node *root) 
-    {
-        vector<int> ans;
+    vector<int> serialize(Node *root) {
+        vector<int>ans;
         preorder(root,ans);
         return ans;
     }
-    
-    //Function to deserialize a list and construct the tree.
     int i=0;
-    Node * deSerialize(vector<int> &A)
-    {
-       //Your code here
-       int value=A[i];
-       i++;
-       if(value==-1)
-       return NULL;
-       
-       Node *newNode=new Node(value);
-       newNode->left=deSerialize(A);
-       newNode->right=deSerialize(A);
-        return newNode;
-       
+    Node *deSerialize(vector<int> &arr) {
+        //CodeGenius
+        int val=arr[i];
+        i++;
+        if(val==-1) return NULL;
+        Node *nn=new Node(val);
+        nn->left=deSerialize(arr);
+        nn->right=deSerialize(arr);
+        return nn;
+    }
+};
+//JAVA CODE
+class Tree {
+    // Function to serialize a tree and return a list containing nodes of tree.
+    public ArrayList<Integer> serialize(Node root) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        serialize(root, arr);
+        return arr;
+    }
+    
+    void serialize(Node root, ArrayList<Integer> arr){
+        if(root == null){
+            arr.add(-1);
+            return;
+        }
+        arr.add(root.data);
+        serialize(root.left, arr);
+        serialize(root.right, arr);
     }
 
+    // Function to deserialize a list and construct the tree.
+    public Node deSerialize(ArrayList<Integer> arr) {
+        int []index = new int[1];
+        return deSerialize(arr, index);
+    }
+    Node deSerialize(ArrayList<Integer>arr, int[] index){
+        if (arr.get(index[0]) == -1){
+            ++index[0];
+            return null;
+        }
+        Node newNode = new Node(arr.get(index[0]));
+        ++index[0];
+        newNode.left = deSerialize(arr, index);
+        newNode.right = deSerialize(arr, index);
+        return newNode;
+    }
 };
