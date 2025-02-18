@@ -1,0 +1,44 @@
+//C++ CODE
+class Solution {
+  public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        //CodeGenius
+        priority_queue<pair<int,vector<int>>>maxHeap;
+        for(auto &i:points){
+            int x=i[0],y=i[1];
+            int dist=x*x + y*y;
+            maxHeap.push({dist,i});
+            if(maxHeap.size()>k) maxHeap.pop();
+        }
+        vector<vector<int>>ans;
+        while(!maxHeap.empty()){
+            ans.push_back(maxHeap.top().second);
+            maxHeap.pop();
+        }
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int[][] kClosest(int[][] points, int k) {
+        int ans[][] = new int[k][2];
+        PriorityQueue<Pair>pq = new PriorityQueue<>((a,b)->a.sq-b.sq);
+        for(int p[]:points){
+            int sq = p[0]*p[0]+p[1]*p[1];
+            Pair pr = new Pair(sq,p);
+            pq.offer(pr);
+        }
+        while(k-- !=0){
+            ans[k] = pq.poll().pt;
+        }
+        return ans;
+    }
+}
+class Pair{
+    int sq;
+    int pt[];
+    Pair(int sq,int pt[]){
+        this.sq = sq;
+        this.pt = pt;
+    }
+}
