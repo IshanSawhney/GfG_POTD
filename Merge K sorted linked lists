@@ -1,0 +1,49 @@
+//C++ CODE
+class Solution {
+  public:
+    #define p pair<int,Node*>
+    Node* mergeKLists(vector<Node*>& arr) {
+        //CodeGenius
+        Node* newHead= new Node(-1);
+        priority_queue<p,vector<p>,greater<p>>pq;
+        for(int i=0;i<arr.size();i++){
+            Node*temp=arr[i];
+            pq.push({temp->data,temp});
+        }
+        Node *temp=newHead;
+        while(!pq.empty()){
+            Node* curr=pq.top().second;
+            pq.pop();
+            temp->next=curr;
+            temp=temp->next;
+            if(curr->next) pq.push({curr->next->data,curr->next});
+        }
+        return newHead->next;
+        
+    }
+};
+//JAVA CODE
+class Solution {
+    Node mergeKLists(List<Node> arr) {
+        // CodeGenius
+        PriorityQueue<Integer> pq =new PriorityQueue<>();
+        for(Node node :arr)
+        {
+            while(node!=null)
+            {
+                pq.add(node.data);
+                node=node.next;
+            }
+        }
+        Node dummy = new Node(-1);
+        Node tmp =dummy;
+        while(!pq.isEmpty())
+        {
+            Node node=new Node(pq.poll());
+            tmp.next=node;
+            tmp=tmp.next;
+        }
+        return dummy.next;
+    }
+
+}
