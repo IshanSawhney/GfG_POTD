@@ -1,52 +1,41 @@
+//C++ CODE
 class Solution {
   public:
-    int maxLength(string& str) {
-        int ans=0;
-        int op=0,cl=0;
-        for(int i=0;i<str.size();i++)
-        {
-            if(str[i]=='(')
-            {
-                op++;
-            }
-            else
-            {
-                cl++;
-            }
-            
-            if(op==cl)
-            {
-              ans=max(ans,op);
-            }
-            if(cl>op)
-            {
-                op=0;
-                cl=0;
+    int maxLength(string& s) {
+        //CodeGenius
+        stack<int>st;
+        st.push(-1);
+        int maxi=0;
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='(') st.push(i);
+            else{
+                st.pop();
+                if(!st.empty()) maxi=max(maxi,i-st.top());
+                else st.push(i);
             }
         }
-        op=0,cl=0;
-        for(int i=str.size()-1;i>=0;i--)
-        {
-            if(str[i]=='(')
-            {
-                op++;
-            }
-            else
-            {
-                cl++;
-            }
-            
-            if(op==cl)
-            {
-                ans=max(ans,op);
-            }
-            if(op>cl)
-            {
-                op=0;
-                cl=0;
-            }
-        }
-        
-        return ans*2;
+        return maxi;
     }
 };
+// JAVA CODE
+class Solution {
+    static int maxLength(String s) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        int maxLen = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                stack.push(i);
+            } else {
+                stack.pop();
+                if (stack.isEmpty()) {
+                    stack.push(i);
+                } else {
+                    maxLen = Math.max(maxLen, i - stack.peek());
+                }
+            }
+        }
+
+        return maxLen;
+    }
+}
