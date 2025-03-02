@@ -1,0 +1,36 @@
+//C++ CODE
+class Solution {
+  public:
+    vector<int> maxOfSubarrays(vector<int>& arr, int k) {
+        // CodeGenius
+        deque<int>dq;
+        vector<int>ans;
+        for(int i=0;i<arr.size();i++){
+            while(!dq.empty() && dq.front()<=i-k) dq.pop_front();
+            while(!dq.empty() && arr[dq.back()]<=arr[i]) dq.pop_back();
+            dq.push_back(i);
+            if(i>=k-1) ans.push_back(arr[dq.front()]);
+        }
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public ArrayList<Integer> maxOfSubarrays(int arr[], int k) {
+        ArrayList<Integer> result = new ArrayList<>();
+        Deque<Integer> deque = new LinkedList<>();
+    for (int i = 0; i < arr.length; i++) {
+        while (!deque.isEmpty() && deque.peek() < i - k + 1) {
+            deque.poll();
+        }
+        while (!deque.isEmpty() && arr[deque.peekLast()] < arr[i]) {
+            deque.pollLast();
+        }
+        deque.offer(i);
+        if (i >= k - 1) {
+            result.add(arr[deque.peek()]);
+        }
+    }
+    return result;
+    }
+}
