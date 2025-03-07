@@ -1,0 +1,50 @@
+//C++ CODE
+class Solution {
+  public:
+    int dp[1001][1001];
+    int LCS(string &a , string &b,int i,int j){
+        //base case
+        if(i==a.size() || j==b.size()) return 0;
+        //recursive case
+        if(dp[i][j]!=-1) return dp[i][j];
+        
+        if(a[i]==b[j]) return dp[i][j]= 1+LCS(a,b,i+1,j+1);
+        else return dp[i][j]= max(LCS(a,b,i,j+1),LCS(a,b,i+1,j));
+    }
+    int longestPalinSubseq(string &s) {
+        //CodeGenius
+        memset(dp,-1,sizeof(dp));
+        string rev=s;
+        reverse(rev.begin(),rev.end());
+        return LCS(s,rev,0,0);
+        
+    }
+};
+// JAVA CODE
+class Solution {
+    int dp[][];
+    public int f1(String s, String t, int i, int j){
+        if(i<0 || j<0)return 0;
+        if(s.charAt(i) == t.charAt(j)){
+            return dp[i][j] = 1+f1(s, t, i-1, j-1);
+        }
+        
+        if(dp[i][j] != -1)return dp[i][j];
+        
+        int first = f1(s, t, i-1, j);
+        int second = f1(s, t, i, j-1);
+        return dp[i][j] = Math.max(first, second);
+    }
+    
+    public int longestPalinSubseq(String s) {
+        // code here
+        int n = s.length();
+        dp = new int[n][n];
+        for(int ar[]: dp){
+            Arrays.fill(ar, -1);
+        }
+        StringBuilder sb = new StringBuilder(s);
+        String r = sb.reverse().toString();
+        return f1(s, r, n-1, n-1);
+    }
+}
