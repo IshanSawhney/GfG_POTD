@@ -1,0 +1,73 @@
+//C++ CODE
+class Solution {
+  public:
+    int length(int left,int right,string &s){
+        int len=0;
+        while(left>=0 && right<s.size()){
+            if(s[left]==s[right]){
+                len+=2;
+                left--;
+                right++;
+            }
+            else break;
+        }
+        return len;
+    }
+    string longestPalindrome(string &s) {
+        // CodeGenius
+        int n=s.size();
+        int maxlen=1;
+        int start=0;
+        
+        //odd
+        for(int i=0;i<n;i++){
+            int len=1+length(i-1,i+1,s);
+            if(len>maxlen){
+            maxlen=len;
+            start=i-len/2;
+            }
+        }
+        //even
+        for(int i=1;i<n;i++){
+            int len=length(i-1,i,s);
+            if(len>maxlen){
+            maxlen=len;
+            start=i-len/2;
+            }
+        }
+        return s.substr(start,maxlen);
+    }
+};
+//JAVA CODE
+class Solution {
+    static String expandAroundCenter(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return s.substring(left + 1, right);
+    }
+
+    static String longestPalindrome(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+
+        String longestPalin = "";
+        for (int i = 0; i < s.length(); i++) {
+            // Odd length palindromes (single character center)
+            String pal1 = expandAroundCenter(s, i, i);
+            if (pal1.length() > longestPalin.length()) {
+                longestPalin = pal1;
+            }
+
+            // Even length palindromes (two character center)
+            String pal2 = expandAroundCenter(s, i, i + 1);
+            if (pal2.length() > longestPalin.length()) {
+                longestPalin = pal2;
+            }
+        }
+
+        return longestPalin;
+    }
+}
