@@ -1,0 +1,39 @@
+//C++ CODE
+class Solution {
+  public: 
+    bool solve(vector<int>& arr, int sum,int i,vector<vector<int>>&dp){
+        //base case 
+        if(sum==0) return true;
+        if(i==arr.size()) return false;
+        //recursive case
+        if(dp[i][sum]!=-1) return dp[i][sum];
+        bool pick=false,nopick=false;
+        if(arr[i]<=sum) pick=solve(arr,sum-arr[i],i+1,dp);
+        nopick=solve(arr,sum,i+1,dp);
+        return dp[i][sum]= (pick || nopick);
+    }
+    bool isSubsetSum(vector<int>& arr, int sum) {
+        // CodeGenius
+        int n=arr.size();
+        vector<vector<int>>dp(n,vector<int>(sum+1,-1));
+        return solve(arr,sum,0,dp);
+        
+    }
+};
+//JAVA CODE
+class Solution {
+    static Boolean isSubsetSum(int arr[], int sum) {
+        // code here
+        int n=arr.length;
+        Boolean dp[][]=new Boolean[n][sum+1];
+        return rec(n-1,arr,sum,dp);
+    }
+    private static Boolean rec(int id,int arr[],int sum,Boolean dp[][]){
+        if(sum==0) return true;
+        if(id<0 || sum<0) return false;
+        if(dp[id][sum]!=null) return dp[id][sum];
+        Boolean p=rec(id-1,arr,sum-arr[id],dp);
+        Boolean np=rec(id-1,arr,sum,dp);
+        return dp[id][sum]=p || np;
+    }
+}
