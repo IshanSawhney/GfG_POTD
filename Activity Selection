@@ -1,0 +1,43 @@
+//C++ CODE
+class Solution {
+  public:
+    int activitySelection(vector<int> &start, vector<int> &finish) {
+        //CodeGenius
+        vector<pair<int,int>>temp;
+        for(int i=0;i<start.size();i++)temp.push_back({start[i],finish[i]});
+        auto comp=[&](auto &a,auto& b){
+            return a.second<b.second;
+        };
+        sort(temp.begin(),temp.end(),comp);
+        int count=1;
+        int currFinish=temp[0].second;
+        for(int i=1;i<start.size();i++){
+            if(temp[i].first>currFinish){
+                count++;
+                currFinish=temp[i].second;
+            }
+        }
+        return count;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int activitySelection(int[] start, int[] finish) {
+        int n = start.length;
+        int[][] arr = new int[n][2];
+        for(int i = 0 ; i < n ; i++){
+            arr[i][0] = start[i];
+            arr[i][1] = finish[i];
+        }
+        Arrays.sort(arr, (a,b) -> a[1] - b[1]);
+        int end=-1;
+        int ans=0;
+        for(int i = 0 ; i < n ; i++){
+            if(end < arr[i][0]){
+                ans++;
+                end = arr[i][1];
+            }
+        }
+        return ans;
+    }
+}
