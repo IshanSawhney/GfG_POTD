@@ -1,0 +1,76 @@
+//C++ CODE
+class Solution {
+  public:
+    bool dfs(int node,vector<int>adj[],vector<int>&vis,vector<int>&currvis){
+        vis[node]=1;
+        currvis[node]=1;
+        for(auto it: adj[node]){
+            if(vis[it]==0){
+            if (dfs(it,adj,vis,currvis)) return true;}
+            else if(currvis[it]==1) return true;
+        }
+        currvis[node]=0;
+        return false;
+    }
+    bool isCyclic(int V, vector<vector<int>> &edges) {
+        //CodeGenius
+        vector<int>adj[V];
+        vector<int>vis(V,0);
+        for(int i=0;i<edges.size();i++){
+            adj[edges[i][0]].push_back(edges[i][1]);
+        }
+        for(int i=0;i<V;i++){
+                vector<int>currvis(V,0);
+                if(dfs(i,adj,vis,currvis)) return true;
+         }
+         return false;
+    }
+};
+//JAVA CODE
+class Solution {
+    public boolean isCyclic(int V, int[][] edges) {
+        // code here
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            adj.add(new ArrayList<>());
+        }
+        
+        for (int[] edge : edges){
+            adj.get(edge[0]).add(edge[1]);
+        }
+        
+        int n = adj.size();
+        
+        boolean[] vis = new boolean[n];
+        boolean[] path = new boolean[n];
+        
+        for (int i = 0; i < n; i++) {
+            if (!vis[i] && dfs(i, adj, vis, path)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private boolean dfs(int i, ArrayList<ArrayList<Integer>> adj, boolean[] vis, boolean[] path) {
+        vis[i] = true;
+        path[i] = true;
+    
+        
+        for (int node : adj.get(i)) {
+            if (path[node]) {
+                return true;
+            }
+            
+            if (!vis[node]) {
+                if (dfs(node, adj, vis, path)) {
+                    return true;
+                }
+            }
+        }
+        
+        path[i] = false;
+        return false;
+    }
+}
