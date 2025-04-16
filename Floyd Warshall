@@ -1,0 +1,46 @@
+//C++ CODE
+class Solution {
+  public:
+    void floydWarshall(vector<vector<int>> &dist) {
+        // CodeGenius
+        int n=dist.size();
+        for(int via=0;via<n;via++){
+            for(int i=0;i<n;i++){
+                for(int j=0;j<n;j++){
+                    if(dist[i][via] != 100000000 && dist[via][j]!=100000000 &&dist[i][j]>dist[i][via]+dist[via][j]){
+                        dist[i][j]=dist[i][via]+dist[via][j];
+                    }
+                }
+            }
+        }
+        
+    }
+};
+// JAVA CODE
+class Solution {
+    public void floydWarshall(int[][] dist) {
+        int V = dist.length;
+
+        // Add all vertices one by one to
+        // the set of intermediate vertices.
+        for (int k = 0; k < V; k++) {
+
+            // Pick all vertices as source one by one
+            for (int i = 0; i < V; i++) {
+
+                // Pick all vertices as destination
+                // for the above picked source
+                for (int j = 0; j < V; j++) {
+
+                    // If vertex k is on the shortest path
+                    // from i to j, then update the value of
+                    // dist[i][j]
+                    if (dist[i][k] != 100000000 && dist[k][j] != 100000000 &&
+                        dist[i][j] > dist[i][k] + dist[k][j]) {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                    }
+                }
+            }
+        }
+    }
+}
