@@ -1,0 +1,29 @@
+//C++ CODE
+class Solution {
+  public:
+    int findDuplicate(vector<int>& arr) {
+        // CodeGenius
+        int n=arr.size();
+        int ogsum=0;
+        for(int i=1;i<n;i++) ogsum+=i;
+        int actualsum=0;
+        for(int i=0;i<n;i++) actualsum+=arr[i];
+        return actualsum-ogsum;        
+    }
+};
+//JAVA CODE
+class Solution {
+    public int findDuplicate(int[] arr) {
+        // code here
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int length = arr.length - 1;
+        long totalSum = ((long)length * ((long)(length + 1))) / 2;
+        long currentSum = 0;
+        for (int index = 0; index <= length; index++) {
+            currentSum += arr[index];
+        }
+        return (int)(currentSum - totalSum);
+    }
+}
