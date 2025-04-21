@@ -1,14 +1,25 @@
+//C++ CODE
 class Solution {
   public:
-
-    //CodeGenius
-    int missingNumber(int n, vector<int>& arr) {
-
-        long long sum=n*(n+1)/2;
-        long long sum2=0;
-        for(int i=0;i<arr.size();i++){
-            sum2+=arr[i];
-        }
-        return int(sum-sum2);
+    int missingNum(vector<int>& arr) {
+        //CodeGenius
+        int n=arr.size()+1;
+        int ogsum=0;
+        for(int i=1;i<=n;i++)ogsum+=i;
+        int actualsum=0;
+        for(int i=0;i<arr.size();i++)actualsum+=arr[i];
+        return ogsum-actualsum;
     }
 };
+//JAVA CODE
+class Solution {
+    int missingNum(int arr[]) {
+        // code here
+        int n=arr.length+1;
+        long sum=(long) n*(n+1)/2;
+        for(long num:arr){
+            sum-=num;
+        }
+        return (int) sum;
+    }
+}
