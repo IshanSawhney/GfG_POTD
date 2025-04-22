@@ -1,0 +1,23 @@
+//C++ CODE
+class Solution {
+  public:
+    int findUnique(vector<int> &arr) {
+        //CodeGenius
+        int ans=0;
+        for(auto it:arr){
+            ans^=it;
+        }
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int findUnique(int[] arr) {
+        int res = arr[0];
+        for(int i = 1; i < arr.length; i++)
+        {
+            res = res^arr[i];
+        }
+        return res;
+    }
+}
