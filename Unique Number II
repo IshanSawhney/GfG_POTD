@@ -1,0 +1,55 @@
+//C++ CODE
+class Solution {
+  public:
+    vector<int> singleNum(vector<int>& arr) {
+        // CodeGenius
+        int xor_all=0;
+        for(int it:arr) xor_all^=it;
+        
+        int set_bit=xor_all & -xor_all;
+        int G1=0,G0=0;
+        for(int it : arr){
+            if(it & set_bit) G1^=it;
+            else G0^=it;
+        }
+        if(G1<G0) return {G1,G0};
+        else return {G0,G1};
+    }
+};
+// JAVA CODE
+class Solution {
+    public int[] singleNum(int[] arr) {
+        // Get the XOR of the two numbers we need to find
+        int xorVal = 0;
+        for (int i : arr) {
+            xorVal ^= i;
+        }
+
+        // Get its last set bit
+        xorVal &= -xorVal;
+
+        int[] res = new int[2];
+
+        for (int num : arr) {
+
+            // If bit is not set, it belongs to the first set
+            if ((num & xorVal) == 0) {
+                res[0] ^= num;
+            }
+
+            // If bit is set, it belongs to the second set
+            else {
+                res[1] ^= num;
+            }
+        }
+
+        // Ensure the order of the returned numbers is consistent
+        if (res[0] > res[1]) {
+            int temp = res[0];
+            res[0] = res[1];
+            res[1] = temp;
+        }
+
+        return res;
+    }
+}
