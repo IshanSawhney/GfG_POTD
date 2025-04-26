@@ -21,22 +21,29 @@ class Solution {
 };
 //JAVA CODE
 class Solution {
-  public:
-    int count(Node* tree){
-        if(!tree) return 0;
-        return 1+count(tree->left) + count(tree->right);
+    boolean isHeap(Node tree) {
+        int ndes=totcntr(tree);
+        return checker(tree,1,ndes);
     }
-    bool solve(Node* tree,int i,int total){
-        if(!tree) return true;
-        if(i>=total) return false;
-        if(tree->left && tree->data < tree->left->data) return false;
-        if(tree->right && tree->data < tree->right->data) return false;
-        return solve(tree->left,2*i+1,total) && solve(tree->right,2*i+2,total);
+    int totcntr(Node tree){
+        if(tree==null){
+            return 0;
+        }
+        return 1+totcntr(tree.right)+totcntr(tree.left);
     }
-    bool isHeap(Node* tree) {
-        //CodeGenius
-        int total=count(tree);
-        return solve(tree,0,total);
-        
+    boolean checker(Node tree,int ind,int lim){
+        if(tree==null){
+            return true;
+        }
+        if(ind>lim){
+           return false; 
+        }
+        if(tree.left!=null&&tree.left.data>tree.data){
+            return false;
+        }
+        if(tree.right!=null&&tree.right.data>tree.data){
+            return false;
+        }
+        return checker(tree.left,ind*2,lim)&&checker(tree.right,ind*2+1,lim);
     }
-};
+}
