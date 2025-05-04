@@ -1,0 +1,54 @@
+//C++ CODE
+class Solution {
+  public:
+    int findSubString(string& str) {
+        //CodeGenius
+        set<char>s;
+        for(char c: str) s.insert(c);
+        int len=s.size();
+        int ans=INT_MAX;
+        int i=0,j=0;
+        unordered_map<char,int>mp;
+        while(j<str.size()){
+            mp[str[j]]++;
+            if(mp.size()>=len){
+                while(mp[str[i]]>1){
+                    mp[str[i]]--;
+                    i++;
+                }
+                ans=min(ans,j-i+1);
+            }
+            j++;
+        }
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int findSubString(String str) {
+        // code here
+         Set<Character> st=new HashSet<>();
+        for(char i:str.toCharArray())
+        st.add(i);
+        int cnt=Integer.MAX_VALUE;
+        int r=0,l=0;
+        Map<Character,Integer> map=new LinkedHashMap<>();
+        while(r<str.length())
+        {
+            map.put(str.charAt(r),map.getOrDefault(str.charAt(r),0)+1);
+            if(map.size()==st.size())
+            {
+                while(map.size()==st.size())
+                {
+                    cnt=Math.min(cnt,r-l+1);
+                    map.put(str.charAt(l),map.get(str.charAt(l))-1);
+                    if(map.get(str.charAt(l))==0)
+                    map.remove(str.charAt(l));
+                    l++;
+                }
+            }
+            r++;
+        }
+        return cnt;
+    }
+}
