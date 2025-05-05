@@ -1,0 +1,47 @@
+//C++ CODE
+class Solution {
+  public:
+    int findTarget(vector<int>& arr, int target) {
+        //CodeGenius
+        int s=0,e=arr.size()-1;
+        while(s<=e){
+            int mid=s+(e-s)/2;
+            if(arr[mid]==target) return mid;
+            if(mid>s && arr[mid-1]==target) return mid-1;
+            if(mid<e && arr[mid+1]==target) return mid+1;
+            if(arr[mid]>target) e=mid-2;
+            else s=mid+2;
+        }
+        return -1;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int findTarget(int arr[], int target) {
+        // code here
+        int low = 0;
+        int high = arr.length-1;
+
+        while(low<=high){
+            int mid = low + (high-low) / 2;
+
+            if(arr[mid]==target) 
+                return mid;
+
+            if(mid>low && arr[mid-1]==target) 
+                return mid-1;
+
+            if(mid<high && arr[mid+1]==target) 
+                return mid+1;
+
+            if(arr[mid]>target){
+                high = mid - 2;
+            } 
+            else{
+                low = mid + 2;
+            }
+        }
+
+        return -1;
+    }
+}
