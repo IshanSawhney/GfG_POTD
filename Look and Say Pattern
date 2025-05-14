@@ -1,0 +1,60 @@
+//C++ CODE
+class Solution {
+  public:
+    string countAndSay(int n) {
+        //CodeGenius
+        if(n==1) return "1";
+        string curr="1";
+        for(int i=2;i<=n;i++){
+            string curr_i="";
+            int count =1;
+            for(int j=1;j<curr.length();j++){
+                if(curr[j]==curr[j-1]) count++;
+                else{
+                    curr_i+=to_string(count) + curr[j-1];
+                    count=1;
+                }
+            }
+            curr_i+=to_string(count) + curr.back();
+            curr=curr_i;
+        }
+        return curr;
+    }
+};
+//JAVA CODE
+class Solution {
+    // Function to generate the look-and-say sequence
+    public String countAndSay(int n) {
+        if (n == 1) return "1";
+
+        String curr = "1";
+
+        // Start from the second term, build every term
+        // terms using the previous term
+        for (int i = 2; i <= n; i++) {
+            StringBuilder next = new StringBuilder();
+            int cnt = 1;
+
+            for (int j = 1; j < curr.length(); j++) {
+
+                // If same as previous, then increment
+                // count
+                if (curr.charAt(j) == curr.charAt(j - 1)) {
+                    cnt++;
+
+                    // If different process the previous
+                    // character and its count and reset
+                    // count for the current character
+                } else {
+                    next.append(cnt).append(curr.charAt(j - 1));
+                    cnt = 1;
+                }
+            }
+
+            next.append(cnt).append(curr.charAt(curr.length() - 1));
+            curr = next.toString();
+        }
+
+        return curr;
+    }
+};
