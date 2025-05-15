@@ -1,0 +1,28 @@
+//C++ CODE
+class Solution {
+  public:
+    int countSubstring(string &s) {
+        //CodeGenius
+        int ans=s.size();
+        unordered_map<int,int>mp;
+        for(auto c: s){
+            if(mp.find(c)!=mp.end()) ans+=mp[c];
+            mp[c]++;
+        }
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int countSubstring(String s) {
+       int n=s.length();
+       int count=0;
+       HashMap<Character,Integer>ans=new HashMap<>();
+       for(int i=0;i<n;i++){
+           char ch=s.charAt(i);
+           ans.put(ch,ans.getOrDefault(ch,0)+1);
+           count+=ans.get(ch);
+       }
+        return count;
+    }
+}
