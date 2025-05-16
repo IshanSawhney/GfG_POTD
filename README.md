@@ -1,7 +1,7 @@
 <h1 align="center">🚀 GFG Problem of the Day - Daily Solutions</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/github/languages/top/your-username/gfg-pod?style=for-the-badge" />
+  <img src="https://img.shields.io/github/languages/top/IshanSawhney/GfG_POTD?style=for-the-badge" />
   <img src="https://img.shields.io/github/stars/your-username/gfg-pod?style=for-the-badge" />
   <img src="https://img.shields.io/github/forks/your-username/gfg-pod?style=for-the-badge" />
 </p>
