@@ -2,8 +2,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/languages/top/IshanSawhney/GfG_POTD?style=for-the-badge" />
-  <img src="https://img.shields.io/github/stars/your-username/gfg-pod?style=for-the-badge" />
-  <img src="https://img.shields.io/github/forks/your-username/gfg-pod?style=for-the-badge" />
+  <img src="https://img.shields.io/github/stars/IshanSawhney/GfG_POTD?style=for-the-badge" />
+  <img src="https://img.shields.io/github/forks/IshanSawhney/GfG_POTD?style=for-the-badge" />
 </p>
 
 <p align="center">
