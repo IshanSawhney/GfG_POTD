@@ -1,0 +1,47 @@
+//C++ CODE
+class Solution {
+  public:
+    int solve(string &s,string &r,int i , int j,vector<vector<int>>&dp){
+        if(i>=s.size() || j>=r.size()) return 0;
+        
+        if(dp[i][j]!=-1) return dp[i][j];
+        int take=0,nottake=0;
+        if(s[i]==r[j]) take=1+solve(s,r,i+1,j+1,dp);
+        nottake=max(solve(s,r,i,j+1,dp),solve(s,r,i+1,j,dp));
+        
+        return dp[i][j]= max(take,nottake);
+    }
+    int minDeletions(string s) {
+        //CodeGenius
+        string r=s;
+        reverse(r.begin(),r.end());
+        int n=s.size();
+        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+        return s.size()-solve(s,r,0,0,dp);
+    }
+};
+// JAVA CODE
+class Solution {
+    static int minDeletions(String s) {
+        int n = s.length();
+        String rev = new StringBuilder(s).reverse().toString();
+        return n - longestCommonSubsequence(s, rev);
+    }
+
+    static int longestCommonSubsequence(String s1, String s2) {
+        int n = s1.length();
+        int[][] dp = new int[n+1][n+1];
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s1.charAt(i-1) == s2.charAt(j-1)) {
+                    dp[i][j] = 1 + dp[i-1][j-1];
+                } else {
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                }
+            }
+        }
+
+        return dp[n][n];
+    }
+}
