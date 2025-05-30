@@ -1,16 +1,35 @@
+//C++ CODE
 class Solution {
   public:
-    int findMaxForN(Node* root, int n) {
-        int ans=INT_MIN;
-        while(root){
-            if(root->key <=n){
-                ans=max(ans,root->key);
-                root=root->right;
+    int findMaxFork(Node* root, int k) {
+        // CodeGenius
+        int ans=-1;
+        Node *curr=root;
+        while(curr){
+            if(curr->data<=k){
+                ans=curr->data;
+                curr=curr->right;
             }
             else{
-                root =root->left;
+                curr=curr->left;
             }
         }
-        return ans==INT_MIN?-1:ans;
+        return ans;
     }
 };
+//JAVA CODE
+class Solution {
+
+    public int findMaxFork(Node root, int k) {
+        if (root == null) return -1;
+        if (root.data == k) return k;
+        else if (root.data < k) {
+            int x = findMaxFork(root.right, k);
+            if (x == -1)
+                return root.data;
+            else
+                return x;
+        }
+        return findMaxFork(root.left, k);
+    }
+}
