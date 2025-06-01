@@ -1,53 +1,64 @@
-class Solution{
-public:	
-	
-	int countPairs(vector<vector<int>> &mat1, vector<vector<int>> &mat2, int n, int x)
-	{
-	    int cnt=0;
-	    for(int i=0;i<n;i++){
-	        for(int j=0;j<n;j++){
-	            int target=x-mat1[i][j];
-	            int left=0,right=n-1;
-	            while(left<n && right >=0){
-	                if(mat2[left][right]== target){
-	                    cnt++;
-	                    break;
-	                }
-	                else if(mat2[left][right]<target){
-	                    left++;
-	                }
-	                else{
-	                    right--;
-	                }
-	            }
-	        }
-	    }
-	    return cnt;
-	}
-};class Solution{
-public:	
-	
-	int countPairs(vector<vector<int>> &mat1, vector<vector<int>> &mat2, int n, int x)
-	{
-	    int cnt=0;
-	    for(int i=0;i<n;i++){
-	        for(int j=0;j<n;j++){
-	            int target=x-mat1[i][j];
-	            int left=0,right=n-1;
-	            while(left<n && right >=0){
-	                if(mat2[left][right]== target){
-	                    cnt++;
-	                    break;
-	                }
-	                else if(mat2[left][right]<target){
-	                    left++;
-	                }
-	                else{
-	                    right--;
-	                }
-	            }
-	        }
-	    }
-	    return cnt;
-	}
+//C++ CODE
+class Solution {
+  public:
+    int countPairs(vector<vector<int>> &mat1, vector<vector<int>> &mat2, int x) {
+        // CodeGenius
+        int n=mat1.size();
+        int r1=0,c1=0,r2=n-1,c2=n-1; 
+        int count=0;
+        while(r1<n && r2>=0){
+            int ele1=mat1[r1][c1];
+            int ele2=mat2[r2][c2];
+            if(ele1+ele2 == x){
+                count++;
+                c1++;
+                c2--;
+            }
+            else if(ele1+ele2 < x) c1++;
+            else c2--;
+            
+            if(c1==n){
+                c1=0;
+                r1++;
+            }
+            if(c2==-1){
+                c2=n-1;
+                r2--;
+            }
+        }
+        return count;
+        
+    }
 };
+//JAVA CODE
+class Solution {
+    int countPairs(int[][] mat1, int[][] mat2, int x) {
+        int r1 = 0, c1 = 0;
+        int r2 = mat2.length - 1, c2 = mat2[0].length - 1;
+        int count = 0;
+
+        while (r1 < mat1.length && r2 >= 0) {
+            int val = mat1[r1][c1] + mat2[r2][c2];
+
+            if (val == x) {
+                count++;
+                c1++;
+                c2--;
+            } else if (val < x) {
+                c1++;
+            } else {
+                c2--;
+            }
+            if (c1 == mat1[0].length) {
+                c1 = 0;
+                r1++;
+            }
+            if (c2 == -1) {
+                c2 = mat2[0].length - 1;
+                r2--;
+            }
+        }
+
+        return count;
+    }
+}
