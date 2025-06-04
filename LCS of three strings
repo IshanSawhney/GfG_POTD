@@ -1,0 +1,59 @@
+//C++ CODE
+class Solution {
+  public:
+    int dp[101][101][101];
+    int solve(string& s1, string& s2, string& s3,int i,int j,int k){
+        //base case
+        if(i>=s1.size() || j>=s2.size() || k>=s3.size() ) return 0;
+        //recursive case
+        if(dp[i][j][k] != -1) return dp[i][j][k];
+        
+        if(s1[i]==s2[j] && s2[j]==s3[k])
+        return 1+solve(s1,s2,s3,i+1,j+1,k+1);
+        
+        else{
+            return dp[i][j][k]= max({
+                solve(s1,s2,s3,i+1,j,k),
+                solve(s1,s2,s3,i,j+1,k),
+                solve(s1,s2,s3,i,j,k+1),
+                solve(s1,s2,s3,i+1,j+1,k),
+                solve(s1,s2,s3,i,j+1,k+1),
+                solve(s1,s2,s3,i+1,j,k+1)
+            });
+        }
+    }
+    int lcsOf3(string& s1, string& s2, string& s3) {
+        // CodeGenius
+        memset(dp,-1,sizeof(dp));
+        return solve(s1,s2,s3,0,0,0);
+    }
+};
+// JAVA CODE
+public class Solution {
+    public int lcsOf3(String s1, String s2, String s3) {
+        int n1 = s1.length();
+        int n2 = s2.length();
+        int n3 = s3.length();
+
+        int[][] prev = new int[n2 + 1][n3 + 1];
+        int[][] curr = new int[n2 + 1][n3 + 1];
+        for (int i = 1; i <= n1; i++) {
+            for (int j = 1; j <= n2; j++) {
+                for (int k = 1; k <= n3; k++) {
+                    if (s1.charAt(i - 1) == s2.charAt(j - 1) &&
+                        s2.charAt(j - 1) == s3.charAt(k - 1)) {
+                        curr[j][k] = 1 + prev[j - 1][k - 1];
+                    } else {
+                        curr[j][k] = Math.max(prev[j][k],
+                                              Math.max(curr[j - 1][k], curr[j][k - 1]));
+                    }
+                }
+            }
+
+            for (int j = 0; j <= n2; j++) {
+                System.arraycopy(curr[j], 0, prev[j], 0, n3 + 1);
+            }
+        }
+        return curr[n2][n3];
+    }
+}
