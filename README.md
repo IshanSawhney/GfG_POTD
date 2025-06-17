@@ -28,8 +28,7 @@
 - 🎥 YouTube Channel: [CodeGenius316](https://www.youtube.com/@CodeGenius316)
 - 📷 Instagram: [ishaan._20](https://www.instagram.com/ishaan._20)
 - 💼 LinkedIn: [Ishan Sawhney](https://www.linkedin.com/in/ishansawhney/)
-- 🧠 GeeksForGeeks: [sawhneyrhz9](https://www.geeksforgeeks.org/user/sawhneyrhz9/)
-- 💡 LeetCode: [sawhneyishan7](https://leetcode.com/u/sawhneyishan7/)
+
 
 ---
 
