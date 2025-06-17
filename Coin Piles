@@ -1,0 +1,77 @@
+//C++ CODE
+class Solution {
+  public:
+    int minimumCoins(vector<int>& arr, int k) {
+        //CodeGenius
+        int n=arr.size();
+        sort(arr.begin(),arr.end());
+        vector<int>pre(n);
+        pre[0]=arr[0];
+        for(int i=1;i<n;i++)
+            pre[i]=pre[i-1]+arr[i];
+        
+        int ans=INT_MAX,prev=0;
+        
+        for(int i=0;i<n;i++){
+            if(i>0) prev=pre[i-1];
+            int pos=upper_bound(arr.begin()+i,arr.end(),arr[i]+k)-arr.begin();
+            int total=pos>0?pre[n-1]-pre[pos-1] : 0;
+            int allowed=(n-pos)*(arr[i]+k);
+            int extracoins = prev+total-allowed;
+            ans=min(ans,extracoins);
+        }
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int minimumCoins(int[] arr, int k) {
+        Arrays.sort(arr);
+        int n = arr.length;
+
+        int[] prefix = new int[n];
+        prefix[0] = arr[0];
+        for (int i = 1; i < n; i++) {
+            prefix[i] = prefix[i - 1] + arr[i];
+        }
+
+        int ans = Integer.MAX_VALUE, prev = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            if (i > 0 && arr[i] == arr[i - 1]) {
+                continue;
+            }
+
+            if (i > 0) {
+                prev = prefix[i - 1];
+            }
+
+            int target = arr[i] + k;
+            int pos = upperBound(arr, target, i, n);
+
+
+            int totalToRemove = prev;
+            if (pos < n) {
+                totalToRemove +=
+                    prefix[n - 1] - prefix[pos - 1] - (n - pos) * (arr[i] + k);
+            }
+
+            ans = Math.min(ans, totalToRemove);
+        }
+
+        return ans;
+    }
+
+    private int upperBound(int[] arr, int key, int low, int high) {
+        while (low < high) {
+            int mid = (low + high) / 2;
+            if (arr[mid] <= key) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+}
