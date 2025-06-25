@@ -1,30 +1,74 @@
-class Solution{
-public:	
-	bool sameFreq(string s)
-	{
-	    unordered_map <char,int> freq_map;
-	    for(char c:s){
-	        freq_map[c]++;
-	    }
-	    unordered_map <int,int> freq_count;
-	    for(const auto &pair : freq_map){
-	        freq_count[pair.second]++;
-	    }
-	    if(freq_count.size()==1){
-	        return true;
-	    }
-	    else if(freq_count.size()==2){
-	        auto it= freq_count.begin();
-	        int freq1= it-> first;
-	        int count1= it-> second;
-	        ++it;
-	        int freq2= it-> first;
-	        int count2= it-> second;
-	        if((count1 ==1 && (freq1 == 1|| freq1 - freq2==1))||(count2 ==1 && (freq2 == 1|| freq2 - freq1==1))){
-	            return true;
-	        }
-	        
-	    }
-	        return false;
-	}
+//C++ CODE
+class Solution {
+  public:
+    bool sameFreq(string& s) {
+        // CodeGenius
+        vector<int>freq(26,0);
+        for(char c : s) freq[c-'a']++;
+        
+        unordered_map<int,int>mp;
+        for(char f: freq) if(f)mp[f]++;
+        
+        if(mp.size()==1) return true;
+        if(mp.size() !=2) return false;
+        
+        auto it = mp.begin();
+        int F1=it->first ,c1=it->second;
+        it++;
+        int F2=it->first ,c2=it->second;
+        if((F1==1 && c1==1) || (F2==1 && c2==1)) return true;
+        if((abs(F1-F2)==1) && ((F1>F2 && c1==1) || (F2>F1 && c2==1))) return true;
+        
+        return false;
+    }
 };
+//JAVA CODE
+class Solution {
+    public boolean sameFreq(String s) {
+        int[] freq = new int[26];
+
+        // Populate character frequency
+        for (int i = 0; i < s.length(); i++) {
+            freq[s.charAt(i) - 'a']++;
+        }
+
+        int maxFreqValue = Integer.MIN_VALUE;
+        int minFreqValue = Integer.MAX_VALUE;
+        int maxFreqCounter = 0;
+        int minFreqCounter = 0;
+
+        for (int f : freq) {
+
+            if (f == 0) continue;
+
+            if (f == maxFreqValue) {
+
+                maxFreqCounter++;
+            }
+            if (f == minFreqValue) {
+
+                minFreqCounter++;
+            }
+            if (f > maxFreqValue) {
+
+                maxFreqValue = f;
+                maxFreqCounter = 1;
+            }
+            if (f < minFreqValue) {
+
+                minFreqValue = f;
+                minFreqCounter = 1;
+            }
+        }
+
+        if ((maxFreqValue - minFreqValue) == 0) {
+            return true;
+        } else if ((maxFreqValue - minFreqValue) == 1 &&
+                   (maxFreqCounter == 1 ||
+                    (minFreqCounter == 1 && minFreqValue == 1))) {
+            return true;
+        }
+
+        return false;
+    }
+}
