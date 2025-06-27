@@ -1,0 +1,61 @@
+//C++ CODE
+class Solution {
+  public:
+    int solve(int i,int j,int n,vector<vector<int>>&mat,vector<vector<vector<int>>>&dp){
+        //bc
+        if(i<0 || j<0 || i>3 || j>2 ||mat[i][j]==-1 )return 0;
+        if(n==0) return 1;
+        if(dp[i][j][n]!=-1) return dp[i][j][n];
+        //rc
+        int ans= solve(i,j,n-1,mat,dp)+
+        solve(i+1,j,n-1,mat,dp)+solve(i-1,j,n-1,mat,dp)+
+        solve(i,j+1,n-1,mat,dp)+solve(i,j-1,n-1,mat,dp);
+        return dp[i][j][n]=ans;
+    }
+    int getCount(int n) {
+        //CodeGenius
+        vector<vector<int>>mat={
+            {1,1,1},
+            {1,1,1},
+            {1,1,1},
+            {-1,1,-1}
+        };
+        int count=0;
+        vector<vector<vector<int>>>dp(4,vector<vector<int>>(3,vector<int>(n,-1)));
+        for(int i=0;i<4;i++){
+            for(int j=0;j<3;j++){
+                if(mat[i][j]!=-1)
+                count+=solve(i,j,n-1,mat,dp);
+            }
+        }
+        return count;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int getCount(int n) {
+        // code here
+        int dialPad[][]=new int[][]{{1,2,3},{4,5,6},{7,8,9},{-1,0,-1}};
+        int ans=0;
+        for(int i=0;i<4;i++){
+            for(int j=0;j<3;j++){
+                ans+=rec(i,j,dialPad,n,new HashMap<>());
+            }
+        }
+        return ans;
+    }
+    private int rec(int i,int j,int dial[][],int n,Map<String,Integer> hm){
+        if(i<0 || j<0 || i==4 || j==3 || dial[i][j]==-1) return 0;
+        String key=i+" "+j+" "+n;
+        if(hm.containsKey(key)) return hm.get(key);
+        int curr=0;
+        if(n==1) return 1;
+        curr+=rec(i,j,dial,n-1,hm);
+        curr+=rec(i-1,j,dial,n-1,hm);
+        curr+=rec(i+1,j,dial,n-1,hm);
+        curr+=rec(i,j+1,dial,n-1,hm);
+        curr+=rec(i,j-1,dial,n-1,hm);
+        hm.put(key,curr);
+        return curr;
+    }
+}
