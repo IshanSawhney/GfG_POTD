@@ -1,0 +1,40 @@
+//C++ CODE
+class Solution {
+  public:
+    vector<int> countLessEq(vector<int>& a, vector<int>& b) {
+        // CodeGenius
+        vector<int>sorted_b(100001,0);
+        for(int i=0;i<b.size();i++) sorted_b[b[i]]++;
+        
+        for(int i=1;i<100001;i++) sorted_b[i]+=sorted_b[i-1];
+        vector<int>ans(a.size());
+        for(int i=0;i<a.size();i++)
+            ans[i]=sorted_b[a[i]];
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public static ArrayList<Integer> countLessEq(int a[], int b[]) {
+        int n = a.length, m = b.length;
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            res.add(0);
+        }
+        int[] cnt = new int[100001];
+        for (int i = 0; i < 100001; i++) {
+            cnt[i] = 0;
+        }
+        for (int i = 0; i < m; i++) {
+            cnt[b[i]]++;
+        }
+        for (int i = 1; i < 100001; i++) {
+            cnt[i] += cnt[i - 1];
+        }
+        for (int i = 0; i < n; i++) {
+            res.set(i, cnt[a[i]]);
+        }
+
+        return res;
+    }
+}
