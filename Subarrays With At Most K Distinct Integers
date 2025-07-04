@@ -1,0 +1,41 @@
+//C++ CODE
+class Solution {
+  public:
+    int countAtMostK(vector<int> &arr, int k) {
+        //CodeGenius
+        unordered_map<int,int>mp;
+        int ans=0;
+        for(int i=0,j=0;j<arr.size();j++){
+            mp[arr[j]]++;
+            if(mp[arr[j]]==1) k--;
+            while(k<0){
+                mp[arr[i]]--;
+                if(mp[arr[i]]==0) k++;
+                i++;
+            }
+            ans+=j-i+1;
+        }
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int countAtMostK(int[] arr, int k) {
+        int n = arr.length;
+        int res = 0;
+        int left = 0, right = 0;
+        Map<Integer, Integer> freq = new HashMap<>();
+        while (right < n) {
+            freq.put(arr[right], freq.getOrDefault(arr[right], 0) + 1);
+            if (freq.get(arr[right]) == 1) k -= 1;
+            while (k < 0) {
+                freq.put(arr[left], freq.get(arr[left]) - 1);
+                if (freq.get(arr[left]) == 0) k += 1;
+                left += 1;
+            }
+            res += (right - left + 1);
+            right += 1;
+        }
+        return res;
+    }
+}
