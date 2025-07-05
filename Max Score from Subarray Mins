@@ -1,0 +1,22 @@
+//C++ CODE
+class Solution {
+  public:
+    int maxSum(vector<int> &arr) {
+        //CodeGenius
+        int ans=0;
+        for(int i =1;i<arr.size();i++)
+            ans=max(ans,arr[i]+arr[i-1]);
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int maxSum(int arr[]) {
+        int n = arr.length;
+        int ans = Integer.MIN_VALUE;
+        for (int i = 1; i < n; i++) {
+            ans = Math.max(arr[i] + arr[i - 1], ans);
+        }
+        return ans;
+    }
+}
