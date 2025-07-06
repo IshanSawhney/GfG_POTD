@@ -1,0 +1,82 @@
+//C++ CODE
+class Solution {
+  public:
+    vector<int> topKSumPairs(vector<int>& a, vector<int>& b, int k) {
+        // CodeGenius
+        int n=a.size();
+        sort(a.rbegin(),a.rend());
+        sort(b.rbegin(),b.rend());
+        
+        priority_queue<pair<int,pair<int,int>>>pq;
+        set<pair<int,int>>vis;
+        
+        pq.push({a[0]+b[0],{0,0}});
+        vis.insert({0,0});
+        vector<int> ans;
+        while(ans.size()<k){
+            auto top=pq.top();
+            pq.pop();
+            
+            int sum=top.first;
+            int i=top.second.first;
+            int j=top.second.second;
+            ans.push_back(sum);
+            
+            if(i<n-1&& vis.find({i+1,j})==vis.end()){
+                pq.push({a[i+1]+b[j],{i+1,j}});
+                vis.insert({i+1,j});
+            }
+            if(j<n-1&& vis.find({i,j+1})==vis.end()){
+                pq.push({a[i]+b[j+1],{i,j+1}});
+                vis.insert({i,j+1});
+            }
+        }
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public void reverse(int[] arr) {
+        int l = 0, r = arr.length - 1;
+        while (l < r) {
+            int temp = arr[l];
+            arr[l++] = arr[r];
+            arr[r--] = temp;
+        }
+    }
+
+    public ArrayList<Integer> topKSumPairs(int[] a, int[] b, int k) {
+        int n = a.length;
+        Arrays.sort(a);
+        Arrays.sort(b);
+        reverse(a);
+        reverse(b);
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((x, y) -> y[0] - x[0]);
+        HashSet<String> vis = new HashSet<>();
+
+        pq.offer(new int[] {a[0] + b[0], 0, 0});
+        vis.add("0#0");
+
+        ArrayList<Integer> res = new ArrayList<>();
+
+        while (res.size() < k && !pq.isEmpty()) {
+            int[] top = pq.poll();
+            int sum = top[0], i = top[1], j = top[2];
+
+            res.add(sum);
+
+            if (i + 1 < n && !vis.contains((i + 1) + "#" + j)) {
+                pq.offer(new int[] {a[i + 1] + b[j], i + 1, j});
+                vis.add((i + 1) + "#" + j);
+            }
+
+            if (j + 1 < n && !vis.contains(i + "#" + (j + 1))) {
+                pq.offer(new int[] {a[i] + b[j + 1], i, j + 1});
+                vis.add(i + "#" + (j + 1));
+            }
+        }
+
+        return res;
+    }
+}
