@@ -1,0 +1,34 @@
+//C++ CODE
+class Solution {
+  public:
+    int countConsec(int n) {
+        //CodeGenius
+        if(n==2) return 1;
+        int prev=0;
+        int curr=1;
+        int next;
+        int ans=1;
+        for(int i=3;i<=n;i++){
+            next=prev+curr;
+            ans=ans*2+ next;
+            prev=curr;
+            curr=next;
+        }
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public static int fibonacci(int n){
+        if(n==0) return 0;
+        else if(n==2 || n==1){
+            return 1;
+        }
+        else return (fibonacci(n-1)+fibonacci(n-2));
+    }
+    public int countConsec(int n) {
+        int pre=1<<n;
+        return (pre-fibonacci(n+2));
+    }
+}
+
