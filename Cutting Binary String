@@ -1,0 +1,65 @@
+//C++ CODE
+class Solution {
+  public:
+    int solve(int i,string s,unordered_set<int>powers,vector<int>&dp){
+        //base case 
+        if(i==s.size()) return 0;
+        //recursive case
+        if(dp[i] != -1) return dp[i];
+        int res=s.size()+1,num=0;
+        for(int j=i;j<s.size();j++){
+            num=num*2+(s[j]-'0');
+            if(s[i]!='0' && powers.count(num))
+            res=min(res,1+solve(j+1,s,powers,dp));
+        }
+        return dp[i]= res;
+    }
+    int cuts(string s) {
+        //CodeGenius
+        if(s[0]=='0') return -1;
+        vector<int>dp(s.size(),-1);
+        unordered_set<int>powers;
+        for(int i=1;i<=1e9;i*=5) powers.insert(i);
+        int ans =solve(0,s,powers,dp);
+        return ans >s.size()?-1 : ans ;
+    }
+};
+//JAVA CODE
+class Solution {
+    Integer [] dp;
+    public int cuts(String s) {
+   
+      dp =new Integer[s.length()+1];
+       int ans=dfs(s,0);
+        return ans==1000?-1:ans;
+    }
+    public int dfs(String s,int idx)
+    {
+        if(idx>=s.length()) return 0;
+        if(dp[idx]!=null) return dp[idx];
+        int ans=1000;
+        
+        for(int i=idx+1;i<=s.length();i++)
+        {
+            if(isValid(s.substring(idx,i)))
+            {
+                ans=Math.min(ans,1+dfs(s,i));
+            }
+        }
+        return dp[idx]=ans;
+        
+    }
+    public boolean isValid(String s)
+    {
+        int number=Integer.parseInt(s,2);
+        if(s.charAt(0)=='0') return false;
+
+        while(number>1)
+        {
+            if(number%5!=0) return false;
+            number/=5;
+        }
+        return true;
+    }
+}
+
