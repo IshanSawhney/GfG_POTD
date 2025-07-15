@@ -1,0 +1,23 @@
+//C++ CODE
+class Solution {
+  public:
+    bool divby13(string &s) {
+        //CodeGenius
+        int num=0;
+        for(int i=0;i<s.size();i++){
+            num=(num*10 + s[i]-'0')%13;
+        }
+        return num==0;
+    }
+};
+//JAVA CODE
+class Solution {
+    public boolean divby13(String s) {
+        int rem = 0;
+        for (int i = 0; i < s.length(); i++) {
+            rem = (rem * 10 + (s.charAt(i) - '0')) % 13;
+        }
+        return rem == 0;
+    }
+}
+
