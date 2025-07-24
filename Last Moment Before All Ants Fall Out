@@ -1,0 +1,26 @@
+//C++ CODE
+class Solution {
+  public:
+    int getLastMoment(int n, vector<int>& left, vector<int>& right) {
+        //CodeGenius
+        int ans=0;
+        for(int i=0;i<left.size();i++)
+        ans=max(ans,left[i]);
+        for(int i=0;i<right.size();i++)
+        ans=max(ans,n-right[i]);
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int getLastMoment(int n, int left[], int right[]) {
+        int ans = 0;
+        for (int num : left) {
+            ans = Math.max(ans, num);
+        }
+        for (int num : right) {
+            ans = Math.max(ans, n - num);
+        }
+        return ans;
+    }
+}
