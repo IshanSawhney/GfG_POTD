@@ -1,0 +1,52 @@
+//C++ CODE
+class Solution {
+  public:
+    int maxRectSum(vector<vector<int>> &mat) {
+        // CodeGenius
+        int n=mat.size(),m=mat[0].size(),finalmaxi=INT_MIN;
+        for(int s=0;s<m;s++){
+            vector<int>temp(n,0);
+            for(int e=s;e<m;e++){
+                for(int i=0;i<n;i++) temp[i]+=mat[i][e];
+                
+                int sum=0,maxi=INT_MIN;
+                for(int i=0;i<n;i++){
+                    sum+=temp[i];
+                    maxi=max(maxi,sum);
+                    if(sum<0) sum=0;
+                }
+                finalmaxi=max(finalmaxi,maxi);
+            }
+        }
+        return finalmaxi;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int maxRectSum(int mat[][]) {
+    int n = mat.length;
+    if (n == 0) return 0;
+    int m = mat[0].length;
+    int maxSum = Integer.MIN_VALUE;
+    int[] temp = new int[n];
+    for (int left = 0; left < m; left++) {
+     
+        Arrays.fill(temp, 0);
+
+        for (int right = left; right < m; right++) {
+           
+            for (int i = 0; i < n; i++) {
+                temp[i] += mat[i][right];
+            }
+            int currMax = temp[0];
+            int currSum = temp[0];
+            for (int i = 1; i < n; i++) {
+                currSum = Math.max(temp[i], currSum + temp[i]);
+                currMax = Math.max(currMax, currSum);
+            }
+            maxSum = Math.max(maxSum, currMax);
+        }
+    }
+    return maxSum;
+}  
+};
