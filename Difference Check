@@ -1,0 +1,72 @@
+//C++ CODE
+class Solution {
+  public:
+    int toSec(string s){
+        return stoi(s.substr(0,2)) * 3600 + stoi(s.substr(3,2)) *60
+        + stoi(s.substr(6,2));
+    }
+    int minDifference(vector<string> &arr) {
+        //CodeGenius
+        vector<bool> vis(86400,false);
+        for(auto &it : arr){
+            int sec=toSec(it);
+            if(vis[sec]) return 0;
+            vis[sec]=true;
+        }
+        int first=-1,two=-1,mini=INT_MAX;
+        for(int i=0;i<86400;i++){
+            if(!vis[i]) continue;
+            if(two !=-1) mini=min(mini,i-two);
+            else first=i;
+            two=i;
+        }
+        mini=min(mini,first+86400-two);
+        return mini;
+        
+    }
+};
+//JAVA CODE
+class Solution {
+    private static int toSeconds(String time) {
+        int h = Integer.parseInt(time.substring(0, 2));
+        int m = Integer.parseInt(time.substring(3, 5));
+        int s = Integer.parseInt(time.substring(6, 8));
+        return h * 3600 + m * 60 + s;
+    }
+
+    public int minDifference(String[] arr) {
+        int totalSec = 24 * 3600;
+
+        boolean[] seen = new boolean[totalSec];
+
+        int n = arr.length;
+        for (int i = 0; i < n; i++) {
+            int sec = toSeconds(arr[i]);
+            if (seen[sec]) {
+                return 0;
+            }
+            seen[sec] = true;
+        }
+
+        int first = -1;
+        int last = -1;
+        int prev = -1;
+        int minDiff = Integer.MAX_VALUE;
+        for (int i = 0; i < totalSec; i++) {
+            if (!seen[i]) {
+                continue;
+            }
+            if (prev != -1) {
+                minDiff = Math.min(minDiff, i - prev);
+            } else {
+                first = i;
+            }
+            prev = i;
+            last = i;
+        }
+        int wrap = first + totalSec - last;
+        minDiff = Math.min(minDiff, wrap);
+
+        return minDiff;
+    }
+}
