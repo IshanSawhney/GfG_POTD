@@ -1,0 +1,54 @@
+//C++ CODE
+class Solution {
+  public:
+    string removeKdig(string &s, int k) {
+        //CodeGenius
+        stack<char>st;
+        for(char c : s){
+            while(!st.empty() && k && c<st.top()){
+                st.pop();
+                k--;
+            }
+            if(!st.empty() || c!='0')
+            st.push(c);
+        }
+        while(!st.empty() && k){
+            st.pop();
+            k--;
+        }
+        if(st.empty()) return "0";
+        string num;
+        while(!st.empty()){
+            num.push_back(st.top());
+            st.pop();
+        }
+        reverse(num.begin(),num.end());
+        return num;
+        
+    }
+};
+//JAVA CODE
+class Solution {
+    public String removeKdig(String s, int k) {
+        int n = s.length();
+        Stack<Character> stk = new Stack<>();
+
+        for (char c : s.toCharArray()) {
+            while (!stk.isEmpty() && k > 0 && stk.peek() > c) {
+                stk.pop();
+                k--;
+            }
+            if (!stk.isEmpty() || c != '0') stk.push(c);
+        }
+        while (!stk.isEmpty() && k-- > 0) stk.pop();
+
+        if (stk.isEmpty()) return "0";
+
+        char[] arr = new char[n];
+        while (!stk.isEmpty()) {
+            arr[n - 1] = stk.pop();
+            n--;
+        }
+        return new String(arr, n, arr.length - n);
+    }
+}
