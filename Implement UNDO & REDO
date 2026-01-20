@@ -1,0 +1,56 @@
+//C++ CODE
+class Solution {
+  public:
+    //CodeGenius
+    string str="";
+    vector<char>v;
+    void append(char x) {
+        // append x into document
+        str.push_back(x);
+    }
+
+    void undo() {
+        // undo last change
+        v.push_back(str[str.size()-1]);
+        str.pop_back();
+        
+    }
+
+    void redo() {
+        // redo changes
+        if(v.size()==0) return;
+        str.push_back(v[v.size()-1]);
+        v.pop_back();
+    }
+
+    string read() {
+        // read the document
+        return str;
+    }
+};
+//JAVA CODE
+class Solution {
+    public String doc = "";
+    Stack<Character> redost = new Stack<>();
+    public void append(char X) {
+        doc += X;
+        while (!redost.isEmpty()) redost.pop();
+    }
+
+    public void undo() {
+        if (!doc.isEmpty()) {
+            char last = doc.charAt(doc.length() - 1);
+            doc = doc.substring(0, doc.length() - 1);
+            redost.push(last);
+        }
+    }
+
+    public void redo() {
+        if (!redost.isEmpty()) {
+            char ch = redost.pop();
+            doc += ch;
+        }
+    }
+
+    public String read() { return doc; }
+}
