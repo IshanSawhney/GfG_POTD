@@ -1,0 +1,14 @@
+class Solution {
+  public:
+    bool isLengthEven(struct Node **head) {
+        
+        Node* ptr = *head;
+        int cnt = 1;
+        while(ptr!=NULL && ptr->next!=NULL){
+            ptr = ptr->next;
+            cnt++;
+        }
+        if(cnt%2 == 0)return true;
+        else return false;
+    }
+};
