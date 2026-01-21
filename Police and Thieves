@@ -35,6 +35,7 @@ class Solution {
             if (i < n && j < n && Math.abs(i - j) <= k) {
                 count++;
                 j++;
+                i++;          //when police catch one thief then move police and thief
             }
             else if (j < n && j < i) {
                 j++;
