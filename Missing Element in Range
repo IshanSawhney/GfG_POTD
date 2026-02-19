@@ -1,0 +1,36 @@
+C++ CODE
+class Solution {
+  public:
+    vector<int> missinRange(vector<int>& arr, int low, int high) {
+        //CodeGenius
+        vector<int>ans;
+        set<int>s;
+        for(int i=0;i<arr.size();i++)
+        s.insert(arr[i]);
+        for(int i=low;i<=high;i++){
+            if(s.find(i)==s.end())
+            ans.push_back(i);
+        }
+        return ans;
+    }
+};
+JAVA CODE
+class Solution {
+    public ArrayList<Integer> missingRange(int[] arr, int low, int high) {
+        int l=arr.length;
+        ArrayList<Integer> fr = new ArrayList<>();
+        HashSet<Integer> r=new HashSet<>();
+        for(int i=0;i<l;i++){
+            if(arr[i]>=low && arr[i]<=high){
+                r.add(arr[i]);
+            }
+        }
+        for(int i=low;i<=high;i++){
+            if(!r.contains(i)){
+                fr.add(i);
+            }
+        }
+        return fr;
+    }
+}
+
