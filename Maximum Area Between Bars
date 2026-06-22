@@ -1,0 +1,52 @@
+#C++ CODE
+class Solution {
+  public:
+    int maxArea(vector<int> &height) {
+        // CodeGenius
+        int i = 0 , j  = height.size()-1;
+        int ans=0;
+        while(i<j){
+            int length = j-i-1;
+            int h = min(height[i],height[j]);
+            
+            int area = length * h;
+            ans = max(ans,area);
+            if(height[i]<height[j]) i++;
+            else j--;
+            
+        }
+        return ans;
+        
+    }
+};
+#JAVA CODE
+class Solution {
+    public int maxArea(List<Integer> height) {
+        int res = 0;
+        int n = height.size();
+        int i = 0, j = n - 1;
+
+        while (i < j) {
+            int h1 = height.get(i);
+            int h2 = height.get(j);
+
+            int width = j - i - 1;
+
+            if (h1 < h2) {
+
+                res = Math.max(res, width * h1);
+                i++;
+            } else if (h2 < h1) {
+
+                res = Math.max(res, width * h2);
+                j--;
+            } else {
+
+                res = Math.max(res, width * h1);
+                i++;
+                j--;
+            }
+        }
+        return res;
+    }
+}
