@@ -1,0 +1,30 @@
+//C++ CODE
+class Solution {
+  public:
+    int countKdivPairs(vector<int>& arr, int k) {
+        //CodeGenius
+        unordered_map<int , int> mp;
+        int ans=0;
+        for(int i : arr){
+            int rem = i%k;
+            ans+=mp[rem];
+            mp[(k-rem)%k]++;
+        }
+        return ans;
+    }
+};
+//JAVA CODE
+class Solution {
+    public int countKdivPairs(int[] arr, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int ans = 0;
+
+        for (int num : arr) {
+            int rem = num % k;
+            ans += map.getOrDefault(rem, 0);
+            map.put((k - rem) % k, map.getOrDefault((k - rem) % k, 0) + 1);
+        }
+
+        return ans;
+    }
+}
